@@ -16,3 +16,4 @@ RUN apt-get update -q && \
 # 覆盖 newRelic 配置文件
 COPY newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini
 
+COPY src/ /var/www/html/
