@@ -13,5 +13,6 @@ RUN apt-get update -q && \
     apt-get autoclean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY newrelic.ini /usr/local/etc/php/conf.d
+# 覆盖 newRelic 配置文件
+COPY newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini
 
