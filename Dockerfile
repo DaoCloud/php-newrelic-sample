@@ -3,7 +3,7 @@ FROM php:5.6-apache
 RUN apt-get update -q && \
     apt-get install -y wget && \
 
-    # Configure the New Relic apt repository 配置 New Relic apt 库
+    # Configure the New Relic apt repository 配置 New Relic Apt 库
     echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
 
     # Trust the New Relic GPG key. 添加 New Relic apt 下载时所需的密钥
