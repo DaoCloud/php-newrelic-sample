@@ -79,6 +79,9 @@ root# docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-licens
 * 构建镜像
 * 部署在云端主机
 
+[DaoCloud 使用图文介绍](http://help.daocloud.io/features/index.html)
+[DaoCloud 使用视频介绍](http://7u2psl.com2.z0.glb.qiniucdn.com/daocloud_small.mp4)
+
 ### NewRelic Dashboard 截图
 ![php-newrelic-sample](/images/newrelic.png "newrelic")
 
