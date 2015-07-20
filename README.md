@@ -79,3 +79,5 @@ root# docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-licens
 * 构建镜像
 * 部署在云端主机
 「截图」
+![php-newrelic-sample](/images/newrelic.png "newrelic")
+
