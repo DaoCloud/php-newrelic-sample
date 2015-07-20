@@ -22,6 +22,9 @@ RUN apt-get update -q && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # 覆盖 newRelic 配置文件
-COPY newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini
+# COPY newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini 
+# OR
+RUN sed -i "s/\"REPLACE_WITH_REAL_KEY\"/\${NEW_RELIC_LICENSE_KEY}/g" /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i "s/\"PHP Application\"/\${NEW_RELIC_APP_NAME}/g" /usr/local/etc/php/conf.d/newrelic.ini
 
 COPY src/ /var/www/html/
