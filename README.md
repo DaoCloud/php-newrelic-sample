@@ -63,8 +63,8 @@ COPY src/ /var/www/html/
 root# docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-license -e NEW_RELIC_APP_NAME=my-app-name -d php-newrelic-image
 ```
 
-* 使用 `-e` 参数，容器启动时会将环境变量注入到容器中。
 * 使用 `--name` 参数，指定容器的名称。
+* 使用 `-e` 参数，容器启动时会将环境变量注入到容器中。
 * 使用 `-d` 参数，容器在启动时会进入后台运行。
 * `php-newrelic-image` 是由我们上面的 `Dockerfile` 构建出来的镜像。
 
@@ -72,4 +72,10 @@ root# docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-licens
 
 比起本地创建，在云端创建会更简单。
 
+* 在 GitHub 上 Fork **[DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample)** 或者添加自己的 Repo.
+* 注册 DaoCloud 
+* 在控制台中选择代码构建
+* 创建新项目，并选择代码源
+* 构建镜像
+* 部署在云端主机
 「截图」
