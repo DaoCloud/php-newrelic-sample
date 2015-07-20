@@ -1,0 +1,6 @@
+# vim swap files
+*.swp
+
+# oh, stupid os x!
+._*
+.DS_Store
