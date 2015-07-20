@@ -1,6 +1,6 @@
 # 如何开发一个 PHP+NewRelic 的生产级 Docker 化应用
 
-目标：我们将为之前创建的 PHP+NewRelic 应用，编写测试代码和创建持续集成环境。本项目代码维护在 Github:DaoCloud/php-newrelic-sample 项目中。
+目标：我们将为之前创建的 PHP+NewRelic 应用，编写测试代码和创建持续集成环境。本项目代码维护在 [DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample) 项目中。
 
 > 本次基础镜像使用位于 [Docker Hub](https://github.com/docker-library/official-images/blob/master/library/php) 的 PHP 官方镜像。
 
@@ -46,10 +46,11 @@ RUN apt-get update -q && \
 
 ```
 # 覆盖 newRelic 配置文件
-COPY newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i "s/\"REPLACE_WITH_REAL_KEY\"/\${NEW_RELIC_LICENSE_KEY}/g" /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i "s/\"PHP Application\"/\${NEW_RELIC_APP_NAME}/g" /usr/local/etc/php/conf.d/newrelic.ini
 ```
 
-* 主要将 `newrelic.appname` 和 `newrelic.license` 按照 Docker 最佳实践通过环境变量的方式暴露出来。
+* 将 `newrelic.appname` 和 `newrelic.license` 按照 Docker 最佳实践通过环境变量的方式暴露出来。
 
 至此，我们 NewRelic 的配置全部完成了,将代码复制到指定目录完成我们镜像构建的最后一步
 
@@ -64,8 +65,8 @@ COPY src/ /var/www/html/
 docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-license NEW_RELIC_APP_NAME=my-app-name -d php-newrelic-image
 ```
 
-* 使用 `-e` 参数，容器启动时会将环境变量注入到容器中。
 * 使用 `--name` 参数，指定容器的名称。
+* 使用 `-e` 参数，容器启动时会将环境变量注入到容器中。
 * 使用 `-d` 参数，容器在启动时会进入后台运行。
 * `php-newrelic-image` 是由我们上面的 Dockerfile 构建出来的镜像
 
@@ -73,4 +74,15 @@ docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-license NEW_
 
 比起本地创建，在云端创建会更简单。
 
-「截图」
+DaoCloud 所有代码都是维护在 [Github](https://github.com/DaoCloud) 上的，将[DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample) fork 到个人的代码库中。
+
+「Github Fork 截图」
+
+成为 DaoCloud 的用户，开始构建镜像
+
+首先，选择代码构建
+
+「代码构建截图」
+
+
+
