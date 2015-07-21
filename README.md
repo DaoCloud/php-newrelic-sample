@@ -83,13 +83,14 @@ root# docker run \
 比起本地创建，在云端创建会更简单。
 
 * 在 GitHub 上 Fork **[DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample)** 或者添加自己的代码仓库。
-* 注册 DaoCloud。
-* 在控制台中选择代码构建。
-* 创建新项目，并选择代码源。
-* 构建镜像。
-* 部署在云端主机。
+* 注册成为 DaoCloud 用户。
+* 在 DaoCloud 「控制台」中选择「代码构建」。
+* 创建新项目，并选择代码源，指定 `Dockerfile` 路径，构建镜像。
+* 将构建的应用镜像部署在云端并指定 `NEW_RELIC_APP_NAME` 和 `NEW_RELIC_LICENSE_KEY` 环境变量。
 
-[DaoCloud 使用图文介绍](http://help.daocloud.io/features/index.html)
+了解如何用 DaoCloud 进行代码构建：参考[代码构建](http://help.daocloud.io/features/build-flows.html)。
+了解如何用 DaoCloud 进行持续集成：参考[持续集成](http://help.daocloud.io/features/continuous-integration/index.html)。
+了解如何部署一个刚刚构建好的应用镜像：参考[应用部署](http://help.daocloud.io/features/packages.html)。
 
 [DaoCloud 使用视频介绍](http://7u2psl.com2.z0.glb.qiniucdn.com/daocloud_small.mp4)
 
