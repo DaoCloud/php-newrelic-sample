@@ -65,7 +65,7 @@ COPY src/ /var/www/html/
 最后，我们将构建好的镜像运行起来
 
 ```bash
-root# docker run \
+docker run \
     --name php-newrelic \
     -e NEW_RELIC_LICENSE_KEY=my-newrelic-license \
     -e NEW_RELIC_APP_NAME=my-app-name \
