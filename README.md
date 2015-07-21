@@ -10,13 +10,13 @@
 
 首先，选择官方的 PHP 镜像作为项目的基础镜像。
 
-```Dockerfile
+```dockerfile
 FROM daocloud.io/php:5.6-apache
 ```
 
 接着，按照 NewRelic 官方 PHP 安装教程，进行脚本的编写。
 
-```Dockerfile
+```dockerfile
 # 安装 NewRelic
 RUN mkdir -p /etc/apt/sources.list.d \
     && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' \
@@ -43,7 +43,7 @@ RUN mkdir -p /etc/apt/sources.list.d \
 
 然后，修改 NewRelic 配置文件。
 
-```Dockerfile
+```dockerfile
 # 覆盖 NewRelic 配置文件
 RUN sed -i 's/"REPLACE_WITH_REAL_KEY"/\${NEW_RELIC_LICENSE_KEY}/g' \
     /usr/local/etc/php/conf.d/newrelic.ini
@@ -55,7 +55,7 @@ RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' \
 
 至此，我们 NewRelic 的配置全部完成了,将代码复制到指定目录完成我们镜像构建的最后一步
 
-```Dockerfile
+```dockerfile
 # /var/www/html/ 为 Apache 目录
 COPY src/ /var/www/html/
 ```
@@ -64,7 +64,7 @@ COPY src/ /var/www/html/
 
 最后，我们将构建好的镜像运行起来
 
-```Bash
+```bash
 root# docker run \
     --name php-newrelic \
     -e NEW_RELIC_LICENSE_KEY=my-newrelic-license \
