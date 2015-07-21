@@ -6,7 +6,7 @@
 
 ### 创建 PHP 应用容器
 
-> 因所有镜像均位于境外服务器，为了确保所有示例能正常运行，DaoCloud 提供了一套境内镜像源，并与官方源保持同步。
+> 因所有官方镜像均位于境外服务器，为了确保所有示例能正常运行，DaoCloud 提供了一套境内镜像源，并与官方源保持同步。
 
 首先，选择官方的 PHP 镜像作为项目的基础镜像。
 
@@ -39,7 +39,7 @@ RUN mkdir -p /etc/apt/sources.list.d \
 
 * `apt-get update` 下载从仓库的软件包列表并获取软件包版本信息。
 * `apt-get install -y newrelic-php5` 安装 NewRelic PHP5 扩展。
-* Docker 镜像所用的 OverlayFS 是多层的，镜像的大小等于所有层次大小的总和，所以我们应该尽量精简每次构建所产生镜像的大小。
+* Docker 镜像采用分层数据存储格式，镜像的大小等于所有层次大小的总和，所以我们应该尽量精简每次构建所产生镜像的大小。
 
 然后，修改 NewRelic 配置文件。
 
@@ -51,14 +51,16 @@ RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' \
     /usr/local/etc/php/conf.d/newrelic.ini
 ```
 
-* 主要将 `newrelic.appname` 和 `newrelic.license` 按照 Docker 最佳实践通过环境变量的方式暴露出来。
+* 主要将 `newrelic.appname` 和 `newrelic.license` 按照 DaoCloud 最佳实践通过环境变量的方式暴露出来。
 
-至此，我们 NewRelic 的配置全部完成了,将代码复制到指定目录完成我们镜像构建的最后一步
+至此，我们 NewRelic 的配置全部完成了,将代码复制到指定目录，并执行构建镜像命令完成我们镜像构建的最后一步
 
 ```dockerfile
 # /var/www/html/ 为 Apache 目录
 COPY src/ /var/www/html/
 ```
+
+`docker build -t php-newrelic-image .`
 
 ### 启动 php-newrelic 容器（本地）
 
@@ -85,7 +87,7 @@ docker run \
 1. 在 GitHub 上 Fork **[DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample)** 或者添加自己的代码仓库。
 2. 注册成为 DaoCloud 用户。
 3. 在 DaoCloud 「控制台」中选择「代码构建」。
-4. 创建新项目，并选择代码源，指定 `Dockerfile` 路径，构建镜像。
+4. 创建新项目，选择代码源，开始构建镜像。
 5. 将构建的应用镜像部署在云端并指定 `NEW_RELIC_APP_NAME` 和 `NEW_RELIC_LICENSE_KEY` 环境变量。
 
 DaoCloud 使用图文介绍
