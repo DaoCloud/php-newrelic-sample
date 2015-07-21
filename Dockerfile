@@ -1,5 +1,5 @@
 # 使用官方 PHP-Apache 镜像
-FROM php:5.6-apache
+FROM daocloud.io/php:5.6-apache
 
 # 安装 NewRelic
 RUN mkdir -p /etc/apt/sources.list.d \
