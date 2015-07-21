@@ -56,6 +56,7 @@ RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' \
 至此，我们 NewRelic 的配置全部完成了,将代码复制到指定目录完成我们镜像构建的最后一步
 
 ```Dockerfile
+# /var/www/html/ 为 Apache 目录
 COPY src/ /var/www/html/
 ```
 

@@ -1,3 +1,4 @@
+# 使用官方 PHP-Apache 镜像
 FROM php:5.6-apache
 
 # 安装 NewRelic
@@ -25,4 +26,5 @@ RUN sed -i 's/"REPLACE_WITH_REAL_KEY"/\${NEW_RELIC_LICENSE_KEY}/g' \
 RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' \
     /usr/local/etc/php/conf.d/newrelic.ini
 
+# /var/www/html/ 为 Apache 目录
 COPY src/ /var/www/html/
