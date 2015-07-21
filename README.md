@@ -19,10 +19,12 @@ FROM daocloud.io/php:5.6-apache
 ```Dockerfile
 # 安装 NewRelic
 RUN mkdir -p /etc/apt/sources.list.d \
-    && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' >> /etc/apt/sources.list.d/newrelic.list \
+    && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' \
+        >> /etc/apt/sources.list.d/newrelic.list \
 
     # 添加 NewRelic APT 下载时用来验证的 GPG 公钥
-    && curl -s https://download.newrelic.com/548C16BF.gpg | apt-key add - \
+    && curl -s https://download.newrelic.com/548C16BF.gpg \
+        | apt-key add - \
 
     # 安装 NewRelic PHP 代理
     && apt-get update \
@@ -43,8 +45,10 @@ RUN mkdir -p /etc/apt/sources.list.d \
 
 ```Dockerfile
 # 覆盖 NewRelic 配置文件
-RUN sed -i 's/"REPLACE_WITH_REAL_KEY"/\${NEW_RELIC_LICENSE_KEY}/g' /usr/local/etc/php/conf.d/newrelic.ini
-RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i 's/"REPLACE_WITH_REAL_KEY"/\${NEW_RELIC_LICENSE_KEY}/g' \
+    /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' \
+    /usr/local/etc/php/conf.d/newrelic.ini
 ```
 
 * 主要将 `newrelic.appname` 和 `newrelic.license` 按照 Docker 最佳实践通过环境变量的方式暴露出来。
@@ -60,7 +64,12 @@ COPY src/ /var/www/html/
 最后，我们将构建好的镜像运行起来
 
 ```Bash
-root# docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-license -e NEW_RELIC_APP_NAME=my-app-name -d php-newrelic-image
+root# docker run \
+    --name php-newrelic \
+    -e NEW_RELIC_LICENSE_KEY=my-newrelic-license \
+    -e NEW_RELIC_APP_NAME=my-app-name \
+    -d \
+    php-newrelic-image
 ```
 
 * 使用 `--name` 参数，指定容器的名称。
@@ -72,17 +81,17 @@ root# docker run --name php-newrelic -e NEW_RELIC_LICENSE_KEY=my-newrelic-licens
 
 比起本地创建，在云端创建会更简单。
 
-* 在 GitHub 上 Fork **[DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample)** 或者添加自己的 Repo.
-* 注册 DaoCloud 
-* 在控制台中选择代码构建
-* 创建新项目，并选择代码源
-* 构建镜像
-* 部署在云端主机
+* 在 GitHub 上 Fork **[DaoCloud/php-newrelic-sample](https://github.com/DaoCloud/php-newrelic-sample)** 或者添加自己的代码仓库。
+* 注册 DaoCloud。
+* 在控制台中选择代码构建。
+* 创建新项目，并选择代码源。
+* 构建镜像。
+* 部署在云端主机。
 
 [DaoCloud 使用图文介绍](http://help.daocloud.io/features/index.html)
 
 [DaoCloud 使用视频介绍](http://7u2psl.com2.z0.glb.qiniucdn.com/daocloud_small.mp4)
 
 ### NewRelic Dashboard 截图
-![php-newrelic-sample](/images/newrelic.png "newrelic")
 
+![php-newrelic-sample](/images/newrelic.png "newrelic")

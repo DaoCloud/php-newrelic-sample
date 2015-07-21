@@ -2,10 +2,12 @@ FROM php:5.6-apache
 
 # 安装 NewRelic
 RUN mkdir -p /etc/apt/sources.list.d \
-    && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' >> /etc/apt/sources.list.d/newrelic.list \
+    && echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' \
+        >> /etc/apt/sources.list.d/newrelic.list \
 
     # 添加 NewRelic APT 下载时用来验证的 GPG 公钥
-    && curl -s https://download.newrelic.com/548C16BF.gpg | apt-key add - \
+    && curl -s https://download.newrelic.com/548C16BF.gpg \
+        | apt-key add - \
 
     # 安装 NewRelic PHP 代理
     && apt-get update \
@@ -18,7 +20,9 @@ RUN mkdir -p /etc/apt/sources.list.d \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # 覆盖 NewRelic 配置文件
-RUN sed -i 's/"REPLACE_WITH_REAL_KEY"/\${NEW_RELIC_LICENSE_KEY}/g' /usr/local/etc/php/conf.d/newrelic.ini
-RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i 's/"REPLACE_WITH_REAL_KEY"/\${NEW_RELIC_LICENSE_KEY}/g' \
+    /usr/local/etc/php/conf.d/newrelic.ini
+RUN sed -i 's/"PHP Application"/\${NEW_RELIC_APP_NAME}/g' \
+    /usr/local/etc/php/conf.d/newrelic.ini
 
 COPY src/ /var/www/html/
